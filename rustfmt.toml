@@ -1,0 +1,2 @@
+max_width = 80
+group_imports = "StdExternalCrate"
