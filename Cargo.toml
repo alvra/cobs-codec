@@ -7,7 +7,7 @@ authors = ["Alexander van Ratingen"]
 homepage = "https://github.com/alvra/cobs-codec"
 repository = "https://github.com/alvra/cobs-codec"
 documentation = "https://docs.rs/cobs-codec"
-description = "Cobs"
+description = "COBS codec for Tokio"
 readme = "README.md"
 keywords = ["io", "async", "tokio", "codec", "cobs"]
 
