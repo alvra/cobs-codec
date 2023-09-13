@@ -2,7 +2,7 @@
 
 [![Documentation](https://docs.rs/cobs-codec/badge.svg)](https://docs.rs/cobs-codec/)
 [![Latest version](https://img.shields.io/crates/v/cobs-codec.svg)](https://crates.io/crates/cobs-codec)
-[![Build Status](https://github.com/alvra/cobs-codec/workflows/Code%20Check/badge.svg)](https://github.com/alvra/cobs-codec/actions?query=workflow%3ACode+Check)
+[![Build Status](https://github.com/alvra/cobs-codec/workflows/CI/badge.svg)](https://github.com/alvra/cobs-codec/actions?query=workflow%3ACI)
 [![unsafe forbidden](https://img.shields.io/badge/unsafe-forbidden-success.svg)](https://github.com/rust-secure-code/safety-dance/)
 
 This crate provides a COBS (Consistent Overhead Byte Stuffing) codec
