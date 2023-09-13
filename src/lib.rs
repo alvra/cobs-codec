@@ -75,6 +75,8 @@
 //! # }
 //! ```
 
+#![forbid(unsafe_code)]
+
 use bytes::{Buf, BufMut, BytesMut};
 
 #[cfg(test)]
