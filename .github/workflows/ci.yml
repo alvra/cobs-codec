@@ -102,7 +102,7 @@ jobs:
           name: coverage-report-llvmcov.lcov
           path: coverage-report-llvmcov.lcov
       - name: Report and Check Code Coverage
-        uses: zgosalvez/github-actions-report-lcov@v2
+        uses: zgosalvez/github-actions-report-lcov@v4
         with:
           coverage-files: coverage-report-llvmcov.lcov
           minimum-coverage: 90
@@ -140,7 +140,7 @@ jobs:
           name: coverage-report-grcov.lcov
           path: coverage-report-grcov.lcov
       - name: Report and Check Code Coverage
-        uses: zgosalvez/github-actions-report-lcov@v2
+        uses: zgosalvez/github-actions-report-lcov@v4
         with:
           coverage-files: coverage-report-grcov.lcov
           minimum-coverage: 90
