@@ -97,7 +97,7 @@ jobs:
         run: cargo llvm-cov --all-features --workspace --lcov --output-path coverage-report-llvmcov.lcov
         # TODO don't include path prefix in lcov file
       - name: Archive Code Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report-llvmcov.lcov
           path: coverage-report-llvmcov.lcov
@@ -135,7 +135,7 @@ jobs:
         with:
           config: grcov-config.yml
       - name: Archive Code Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report-grcov.lcov
           path: coverage-report-grcov.lcov
