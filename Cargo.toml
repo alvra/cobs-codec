@@ -10,6 +10,7 @@ documentation = "https://docs.rs/cobs-codec"
 description = "COBS codec for Tokio"
 readme = "README.md"
 keywords = ["io", "async", "tokio", "codec", "cobs"]
+rust-version = "1.73"
 
 [dependencies]
 bytes = "1.5.0"

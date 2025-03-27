@@ -99,7 +99,7 @@ const fn max_encoded_len(input_len: usize) -> usize {
         // byte of overhead.
         1
     } else {
-        (input_len + 253) / 254
+        input_len.div_ceil(254)
     };
     // +1 for terminator byte.
     input_len + overhead + 1

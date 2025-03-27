@@ -38,14 +38,13 @@ fn repr_bytes(bytes: impl AsRef<[u8]>) -> String {
 }
 
 fn repeat(byte: u8, count: usize) -> impl Iterator<Item = u8> {
-    std::iter::repeat(byte).take(count)
+    std::iter::repeat_n(byte, count)
 }
 
 /// A `BytesMut` only allocates in multiples of 8 bytes.
 fn bytes_capacity(cap: usize) -> usize {
     if cap < 128 {
-        // cap.next_multiple_of(8)  // TODO rust >= 1.73
-        8 * ((cap + 7) / 8)
+        cap.next_multiple_of(8)
     } else {
         cap
     }
