@@ -21,8 +21,8 @@
 //!
 //! **Size**: The encoding has the least overhead when the message
 //!   contains one sentinel at least every 254 bytes.
-//!  Note that this consideration is irrelevant for messages
-//!  up to 254 bytes long.
+//!   Note that this consideration is irrelevant for messages
+//!   up to 254 bytes long.
 //!
 //! **Speed**: Encoding/decoding is fastest for messages with as few
 //!   sentinel values as possible, ideally none.
@@ -114,8 +114,8 @@ const fn decode_buffer_cap(max_len: usize) -> usize {
     }
 }
 
-/// Encoding a len (between `0` and `MAX_RUN` inclusive) into a byte such that
-/// we avoid `SENTINEL`.
+/// Encoding a len (between `0` and `MAX_RUN` inclusive) into a byte
+/// such that we avoid `SENTINEL`.
 #[inline(always)]
 fn encode_len<const SENTINEL: u8>(len: usize) -> u8 {
     debug_assert!(len <= MAX_RUN);
@@ -180,22 +180,22 @@ fn encode<const SENTINEL: u8, const MAX_LEN: usize>(
     } else {
         let mut prev_run_was_maximal = false;
 
-        // The encoding process can be described in terms of "runs" of non-zero
-        // bytes in the input data. We process each run individually.
+        // The encoding process can be described in terms of "runs" of
+        // non-sentinel bytes in the input data. We process each run individually.
         //
-        // Currently, the scanning-for-zeros loop here is the hottest part of the
-        // encode profile.
+        // Currently, the scanning-for-sentinels loop here is the hottest part of
+        // the encode profile.
         for mut run in input.split(|&b| b == SENTINEL) {
             // If the last run we encoded was maximal length, we need to encode an
-            // explicit zero between it and our current `run`.
+            // explicit sentinel between it and our current `run`.
             if prev_run_was_maximal {
                 output.put_u8(encode_len::<SENTINEL>(0));
             }
 
             // We can only encode a run of up to `MAX_RUN` bytes in COBS. This may
             // require us to split `run` into multiple output chunks -- in the
-            // extreme case, if the input contains no zeroes, we'll process all of
-            // it here.
+            // extreme case, if the input contains no sentinels, we'll process all
+            // of it here.
             loop {
                 let chunk_len = usize::min(run.len(), MAX_RUN);
                 let (chunk, new_run) = run.split_at(chunk_len);
@@ -206,7 +206,8 @@ fn encode<const SENTINEL: u8, const MAX_LEN: usize>(
                 prev_run_was_maximal = chunk_len == MAX_RUN;
 
                 // We test this condition here, rather than as a `while` loop,
-                // because we want to process empty runs once.
+                // because we want to process empty runs once,
+                // ie. like a do-while loop.
                 if run.is_empty() {
                     break;
                 }
@@ -225,7 +226,8 @@ fn encode<const SENTINEL: u8, const MAX_LEN: usize>(
 /// This type can be customized via generic parameters:\
 /// *`SENTINEL`*: Choose a byte to be used as a frame separator.
 ///   The corresponding [`Decoder`] must use the same value.
-///   Refer to the crate documentation for more details on choosing a sentinel.\
+///   Refer to the crate documentation for more details on
+///   [choosing a sentinel](crate#choosing-a-sentinel-value).\
 /// *`MAX_LEN`*: Choose the maximum size of a message,
 ///   or set to `0` for unlimited message sizes.
 ///   This parameter is used as an optimization.
@@ -357,7 +359,8 @@ enum DecoderState {
 /// This type can be customized via generic parameters:\
 /// *`SENTINEL`*: Choose a byte to be used as a frame separator.
 ///   The corresponding [`Encoder`] must use the same value.
-///   Refer to the crate documentation for more details on choosing a sentinel.\
+///   Refer to the crate documentation for more details on
+///   [choosing a sentinel](crate#choosing-a-sentinel-value).\
 /// *`MAX_LEN`*: Choose the maximum size of a message,
 ///   or set to `0` for unlimited message sizes.
 ///   This parameter is used as a safety measure to prevent
